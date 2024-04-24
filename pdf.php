@@ -1,7 +1,8 @@
 <?php
 //pdf.php;
 
-require_once 'dompdf/autoload.inc.php';
+// require_once 'dompdf/autoload.inc.php';
+require 'composer/vendor/autoload.php';
 
 use Dompdf\Dompdf;
 

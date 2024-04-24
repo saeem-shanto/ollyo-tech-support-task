@@ -3,15 +3,15 @@
 
 include('database_connection.php');
 
-// if(!isset($_SESSION["type"]))
-// {
-// 	header('location:login.php');
-// }
+if(!isset($_SESSION["type"]))
+{
+	header('location:login.php');
+}
 
-// if($_SESSION["type"] != 'master')
-// {
-// 	header("location:index.php");
-// }
+if($_SESSION["type"] != 'master')
+{
+	header("location:index.php");
+}
 
 include('header.php');
 

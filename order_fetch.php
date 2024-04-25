@@ -31,21 +31,18 @@ if(isset($_POST["search"]["value"]))
 
 if(isset($_POST["order"]))
 {
-	$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+	$order  = ["inventory_order_id","inventory_order_name","inventory_order_total","payment_status","inventory_order_status","inventory_order_date"];
+	$query .= 'ORDER BY '.$order[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' ';
 }
 else
 {
 	$query .= 'ORDER BY inventory_order_id DESC ';
 }
 
-// if($_POST["length"] != -1)
-// {
-// 	$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
-// }
 if($_POST["length"] != -1)
 {
-	$start = intval($_POST['start']);
-    $length = intval($_POST['length']);
+	$start = intval($_POST['start'] ??	"0") ;
+    $length = intval($_POST['length'] ?? "0" );
     // Ensure start and length are non-negative
 	if($length<=0){
 

@@ -22,7 +22,8 @@ if(isset($_POST["search"]["value"]))
 
 if(isset($_POST["order"]))
 {
-	$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+	$order  = ["user_id","user_email","user_name","user_status"];
+	$query .= 'ORDER BY '.$order[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' ';
 }
 else
 {

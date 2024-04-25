@@ -87,7 +87,7 @@ foreach($result as $row)
 	$sub_array[] = $row['inventory_order_total'];
 	$sub_array[] = $payment_status;
 	$sub_array[] = $status;
-	$sub_array[] = $row['inventory_order_date'];
+	$sub_array[] =  date_format(date_create($row['inventory_order_date'])," j F Y");
 	if($_SESSION['type'] == 'master')
 	{
 		$sub_array[] = get_user_name($connect, $row['user_id']);

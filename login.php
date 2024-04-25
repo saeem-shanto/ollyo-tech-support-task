@@ -34,8 +34,8 @@ if(isset($_POST["login"]))
 				{
 				
 					$_SESSION['type'] = $row['user_type'];
-					$_SESSION['user_id'] = $row['user_id'];						//SPELLING MISTAKE FIXED(as the spelling was changed later)
-					$_SESSION['user_name'] = $row['user_name'];					//SPELLING MISTAKE FIXED(as the spelling was changed later)
+					$_SESSION['user_id'] = $row['user_id'];						//SPELLING MISTAKE FIXED(as the spelling mismatched later)
+					$_SESSION['user_name'] = $row['user_name'];					//SPELLING MISTAKE FIXED(as the spelling mismatched later)
 					header("location:index.php");
 				}
 				else

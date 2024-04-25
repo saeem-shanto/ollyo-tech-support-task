@@ -67,11 +67,12 @@ include('header.php');
 						</div>
 						<div class="form-group">
 							<label>Enter User Email</label>
-							<input type="text" name="user_email" id="user_email" class="form-control" required />
+							<input type="text"  name="user_email" id="user_email" class="form-control" required />
+							<span id="user_email_error" style="color:red" class="error"></span>
 						</div>
 						<div class="form-group">
 							<label>Enter User Password</label>
-							<input type="password" name="user_password" id="user_password" class="form-control" required />
+							<input type="password" name="user_password" id="user_password" class="form-control" required  />
 						</div>
         			</div>
         			<div class="modal-footer">
@@ -91,6 +92,7 @@ $(document).ready(function(){
 	$('#add_button').click(function(){
 		$('#user_form')[0].reset();
 		$('.modal-title').html("<i class='fa fa-plus'></i> Add User");
+		$('#user_email_error').text("");
 		$('#action').val("Add");
 		$('#btn_action').val("Add");
 	});
@@ -120,13 +122,21 @@ $(document).ready(function(){
 			url:"user_action.php",
 			method:"POST",
 			data:form_data,
+			dataType: 'json',
 			success:function(data)
 			{
-				$('#user_form')[0].reset();
-				$('#userModal').modal('hide');
-				$('#alert_action').fadeIn().html('<div class="alert alert-success">'+data+'</div>');
-				$('#action').attr('disabled', false);
-				userdataTable.ajax.reload();
+				if(data["email_warning"]){
+					$('#user_email_error').text(data['email_warning']);
+					event.preventDefault();
+					return;
+				}else{
+					$('#user_form')[0].reset();
+					$('#user_email_error').text();
+					$('#userModal').modal('hide');
+					$('#alert_action').fadeIn().html('<div class="alert alert-success">'+data["show_message"]+'</div>');
+					$('#action').attr('disabled', false);
+					userdataTable.ajax.reload();
+				}	
 			}
 		})
 	});

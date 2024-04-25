@@ -41,7 +41,12 @@ include('header.php');
 						<input type="email" name="user_email" id="user_email" class="form-control" required value="<?php echo $email; ?>" />
 					</div>
 					<hr />
-					<label>Leave Password blank if you do not want to change</label>
+					<label>Leave old and new Password blank if you do not want to change only email and name</label>
+					<div class="form-group">
+						<label>Old Password</label>
+						<input type="password" name="user_old_password" id="user_old_password" class="form-control" />
+						<span id="old_password_error" style="color:red" class="error"></span>
+					</div>	
 					<div class="form-group">
 						<label>New Password</label>
 						<input type="password" name="user_new_password" id="user_new_password" class="form-control" />
@@ -62,8 +67,13 @@ include('header.php');
 $(document).ready(function(){
 	$('#edit_profile_form').on('submit', function(event){
 		event.preventDefault();
+		$('#old_password_error').text('');
 		if($('#user_new_password').val() != '')
 		{
+			if($('#user_old_password').val().length == 0){
+				$('#old_password_error').text("Enter old password to change password");
+				return;
+			}
 			if($('#user_new_password').val() != $('#user_re_enter_password').val())
 			{
 				$('#error_password').html('<label class="text-danger">Password Not Match</label>');
@@ -83,8 +93,10 @@ $(document).ready(function(){
 			data:form_data,
 			success:function(data)
 			{
+
 				$('#edit_prfile').attr('disabled', false);
 				$('#user_new_password').val('');
+				$('#user_old_password').val('');
 				$('#user_re_enter_password').val('');
 				$('#message').html(data);
 			}

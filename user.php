@@ -115,6 +115,7 @@ $(document).ready(function(){
 	});
 
 	$(document).on('submit', '#user_form', function(event){
+
 		event.preventDefault();
 		$('#action').attr('disabled','disabled');
 		var form_data = $(this).serialize();
@@ -127,6 +128,7 @@ $(document).ready(function(){
 			{
 				if(data["email_warning"]){
 					$('#user_email_error').text(data['email_warning']);
+					$('#action').attr('disabled', false);
 					event.preventDefault();
 					return;
 				}else{
